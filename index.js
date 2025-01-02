@@ -77,22 +77,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (secondsLeft <= 0) {
           clearInterval(countdownInterval);
-          // Attempt to close the window
           try {
             window.close();
           } catch (e) {
-            // If window.close() fails, update the message
-            const successMessage = `
+            // Updated message and icon pointing to close button
+            popupContent.innerHTML = `
               <div class="success-icon">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5l7 7-7 7 M12 5l7 7-7 7"></path>
                 </svg>
               </div>
-              <p class="loading-text">You're in! Welcome back!</p>
-              <p class="loading-text" style="font-size: 0.9rem; margin-top: 0.5rem;">Unable to close window automatically</p>
-              <p class="loading-text" style="font-size: 0.8rem; margin-top: 0.25rem;">Please click the X in the top-right corner to close</p>
+              <p class="loading-text" style="font-size: 0.9rem; margin-top: 0.5rem;">Please close pop-up manually by clicking X icon in the top-right corner</p>
             `;
-            popupContent.innerHTML = successMessage;
           }
         }
       }, 1000);
