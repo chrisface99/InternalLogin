@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
     lastLength = currentValue.length;
   });
 
-  // Toggle password visibility
   toggleButton.addEventListener("click", function () {
     const type =
       passwordInput.getAttribute("type") === "password" ? "text" : "password";
@@ -39,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
       type === "password" ? "#a0aec0" : "#667eea";
   });
 
-  // Form submission and popup handling
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const username = document.querySelector("#username").value;
@@ -51,12 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Show loading popup
     popup.classList.add("visible");
 
-    // Simulate login process
     setTimeout(() => {
-      // Show initial success message
       popupContent.innerHTML = `
         <div class="success-icon">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
           try {
             window.close();
           } catch (e) {
-            // Updated message and icon pointing to close button
             popupContent.innerHTML = `
               <div class="success-icon">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Login submitted:", { username, password });
   });
 
-  // Remove error class on input
   document.querySelectorAll(".input-field").forEach((input) => {
     input.addEventListener("input", function () {
       this.classList.remove("error");
