@@ -55,37 +55,20 @@ document.addEventListener("DOMContentLoaded", function () {
       popupContent.innerHTML = `
         <div class="success-icon">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
           </svg>
         </div>
         <p class="loading-text">You're in! Welcome back!</p>
-        <p class="loading-text countdown" style="font-size: 0.9rem; margin-top: 0.5rem;">Window will close in 5 seconds...</p>
       `;
 
-      let secondsLeft = 5;
-      const countdownInterval = setInterval(() => {
-        secondsLeft--;
-        const countdownElement = popupContent.querySelector(".countdown");
-        if (countdownElement) {
-          countdownElement.textContent = `Window will close in ${secondsLeft} seconds...`;
-        }
-
-        if (secondsLeft <= 0) {
-          clearInterval(countdownInterval);
-          try {
-            window.close();
-          } catch (e) {
-            popupContent.innerHTML = `
-              <div class="success-icon">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5l7 7-7 7 M12 5l7 7-7 7"></path>
-                </svg>
-              </div>
-              <p class="loading-text" style="font-size: 0.9rem; margin-top: 0.5rem;">Please close pop-up manually by clicking X icon in the top-right corner</p>
-            `;
-          }
-        }
-      }, 1000);
+      setTimeout(() => {
+        popupContent.innerHTML = `
+          <div class="success-icon">
+            <svg fill="#F4FBFF" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.293,20.707a1,1,0,0,1,0-1.414L17.586,5H12a1,1,0,0,1,0-2h8a1,1,0,0,1,1,1v8a1,1,0,0,1-2,0V6.414L4.707,20.707a1,1,0,0,1-1.414,0Z"/></svg>
+          </div>
+          <p class="loading-text" style="font-size: 0.9rem; margin-top: 0.5rem;">Please manually close the pop-up by clicking the 'X' icon in the top-right corner</p>
+        `;
+      }, 2000);
     }, 2000);
 
     console.log("Login submitted:", { username, password });
