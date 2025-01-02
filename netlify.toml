@@ -1,12 +1,8 @@
-[
-build
-]
+[build]
   publish = "."
   command = ""
 
-[[
-redirects
-]]
+[[redirects]]
   from = "/*"
   to = "/login.html"
   status = 200
