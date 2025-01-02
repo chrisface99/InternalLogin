@@ -1,0 +1,12 @@
+[
+build
+]
+  publish = "."
+  command = ""
+
+[[
+redirects
+]]
+  from = "/*"
+  to = "/login.html"
+  status = 200
