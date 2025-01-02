@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Simulate login process
     setTimeout(() => {
-      // Show success message with new arrow icon
+      // Show initial success message
       popupContent.innerHTML = `
         <div class="success-icon">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,33 +64,35 @@ document.addEventListener("DOMContentLoaded", function () {
           </svg>
         </div>
         <p class="loading-text">You're in! Welcome back!</p>
-        <p class="loading-text" style="font-size: 0.9rem; margin-top: 0.5rem;">Window will close in 5 seconds...</p>
+        <p class="loading-text countdown" style="font-size: 0.9rem; margin-top: 0.5rem;">Window will close in 5 seconds...</p>
       `;
 
       let secondsLeft = 5;
       const countdownInterval = setInterval(() => {
         secondsLeft--;
-        const countdownElement = popupContent.querySelector("p:last-child");
+        const countdownElement = popupContent.querySelector(".countdown");
         if (countdownElement) {
           countdownElement.textContent = `Window will close in ${secondsLeft} seconds...`;
         }
 
         if (secondsLeft <= 0) {
           clearInterval(countdownInterval);
+          // Attempt to close the window
           try {
             window.close();
           } catch (e) {
-            // Show message to close window manually with arrow icon
-            popupContent.innerHTML = `
+            // If window.close() fails, update the message
+            const successMessage = `
               <div class="success-icon">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
                 </svg>
               </div>
               <p class="loading-text">You're in! Welcome back!</p>
-              <p class="loading-text" style="font-size: 0.9rem; margin-top: 0.5rem;">Please close this window manually</p>
-              <p class="loading-text" style="font-size: 0.8rem; margin-top: 0.25rem;">Click the X in the top-right corner</p>
+              <p class="loading-text" style="font-size: 0.9rem; margin-top: 0.5rem;">Unable to close window automatically</p>
+              <p class="loading-text" style="font-size: 0.8rem; margin-top: 0.25rem;">Please click the X in the top-right corner to close</p>
             `;
+            popupContent.innerHTML = successMessage;
           }
         }
       }, 1000);
