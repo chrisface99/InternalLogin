@@ -49,6 +49,12 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    // Check if username is LDSKPIRS
+    if (username !== "LDSKPIRS") {
+      document.querySelector("#username").classList.add("error");
+      return;
+    }
+
     popup.classList.add("visible");
 
     setTimeout(() => {
