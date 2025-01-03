@@ -16,11 +16,9 @@ body {
 
 .login-container {
     background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
+    padding: 1.5rem;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 400px;
     transform: translateY(0);
     transition: transform 0.3s ease;
 }
