@@ -4,38 +4,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginForm = document.querySelector("#loginForm");
   const popup = document.querySelector("#loading-popup");
   const popupContent = popup.querySelector(".popup-content");
-  let previewTimeout;
-  let lastLength = 0;
-
-  passwordInput.addEventListener("input", function (e) {
-    const currentValue = this.value;
-    const cursorPosition = this.selectionStart;
-
-    if (currentValue.length > lastLength) {
-      clearTimeout(previewTimeout);
-
-      const maskedValue =
-        "•".repeat(currentValue.length - 1) +
-        currentValue[currentValue.length - 1];
-      this.type = "text";
-      this.value = maskedValue;
-
-      previewTimeout = setTimeout(() => {
-        this.type = "password";
-        this.value = currentValue;
-        this.setSelectionRange(cursorPosition, cursorPosition);
-      }, 1000);
-    }
-
-    lastLength = currentValue.length;
-  });
+  let toggleTimeout;
 
   toggleButton.addEventListener("click", function () {
-    const type =
-      passwordInput.getAttribute("type") === "password" ? "text" : "password";
-    passwordInput.setAttribute("type", type);
-    this.querySelector("svg").style.fill =
-      type === "password" ? "#a0aec0" : "#667eea";
+    clearTimeout(toggleTimeout);
+    
+    passwordInput.setAttribute("type", "text");
+    this.querySelector("svg").style.fill = "#667eea";
+    
+    toggleTimeout = setTimeout(() => {
+      passwordInput.setAttribute("type", "password");
+      this.querySelector("svg").style.fill = "#a0aec0";
+    }, 500);
   });
 
   loginForm.addEventListener("submit", function (e) {
@@ -46,12 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!username || !password) {
       if (!username) document.querySelector("#username").classList.add("error");
       if (!password) passwordInput.classList.add("error");
-      return;
-    }
-
-    // Check if username is LDSKPIRS
-    if (username !== "LDSKPIRS") {
-      document.querySelector("#username").classList.add("error");
       return;
     }
 
